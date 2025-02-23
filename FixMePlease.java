@@ -3,7 +3,7 @@ Name: Humza Saleem Khan
 Student Number: 777320@pdsb.net
 Course Code: ICS4U4
 Assignment: Homework - Fixing Errors
-02/21/2025
+02/23/2025
 
 Note: I added some additional comments in the GetValues function
 to better underdtand the code as I was reviewing it
@@ -16,7 +16,7 @@ public class FixMePlease {
     public static void main(String[] args) {
 
 
-        int[] values = GetValues(100, 1);//swapped the max and min values from a max of 1 to a max of 100
+        int[] values = GetValues(100, 2);//swapped the max and min values from a max of 1 to a max of 100
         //and a min of 100 to a min of 1 ^runtime error
         
         for (int i = 1; i < values.length; i++)//setting i to 1 instead of 0 to print values from 1-100 not 0-100
@@ -34,7 +34,7 @@ public class FixMePlease {
         int length = max + 1;//setting the length to max + 1 as the length should be 1 more than the max 
         //               ^logical error  
         
-        if (length < 0)//checking that the length is not 0
+        if (length < 0)//checking if the length is negative
         {
             return null;//returning null 
         }
