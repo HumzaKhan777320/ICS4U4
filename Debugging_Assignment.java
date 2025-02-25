@@ -1,10 +1,9 @@
-//working but need to check for negative earlier so there are no negatives also complete loop
 /*
 Name: Humza Saleem Khan 
 Student Number: 777320@pdsb.net
 Course Code: ICS4U4
 Assignment: Debugging Assignment
-02/23/2025
+02/25/2025
 
  * This program is supposed to allow the user to add numbers to
  * an array, stopping when the enter a negative value.
@@ -30,9 +29,11 @@ Assignment: Debugging Assignment
  *    and end
  */
 
- import java.util.Scanner;
+ import java.util.Scanner;//importing the Scanner library for taking inputs
 
- public class Debugging_Assignment {
+ public class Debugging_Assignment {//changed the public class name to a
+ //more representative name
+ 
      public static void main(String[] args)
      {
          //Create a Scanner
@@ -49,12 +50,25 @@ Assignment: Debugging Assignment
          //that they want to stop by entering a negative number
          int newValue = 0;
          
-         while (newValue >= 0)
+         while (newValue >= 0)//having the while loop run as long as the inputted
+         //value is greater than or equal to 0 which is also checked for later in the
+         //loop to prevent a negative in the array
          {
+            if(valueCount>=100){//checking if the valueCount is over or equal to 100
+            //to make sure the program dosn't overfill the array
+                System.out.println("Congratulations you entered 100 values into the array now it's full Goodbye!");
+                //telling the user the array is full
+            }
              //Get the number
-             System.out.print("Please enter a number (type a negative number to end):");
-             newValue = sc.nextInt();
+             newValue = getInteger(sc);//setting the newValue variabe to the run the getInteger function
+             //with the name of the Scanner as a parameter and stores the return in newValue
              
+             if(newValue<0){//checking if the user's input is a negative before it gets 
+             //added to the array by mistake
+                break;//breaking the while loop as a negative input is the check to
+                //stop the loop
+             }
+            
              //Add the new value to the start of the list,
              //moving all other values down the line
              
@@ -71,13 +85,16 @@ Assignment: Debugging Assignment
          }
  
          //Output the contents of the list
-         System.out.println("Done!  Here are your numbers:");
-         System.out.print("[ ");
-         for (int i = 0; i < valueCount; i++)
+         System.out.println("Done!  Here are your numbers:");//telling the user the
+         //program is displaying the outputted numbers
+         System.out.print("[ ");//printing the oppening bracket of the outputted
+         //array
+         for (int i = 0; i < valueCount; i++)//going through the values array
          {
-             System.out.format("%d ", values[i]);
+             System.out.format("%d ", values[i]);//doing a formated print statement
+             //for each array value
          }
-         System.out.println("]");
+         System.out.println("]");//printing the closing bracket of the outputted array
  
          //Close the Scanner
          sc.close();
@@ -85,21 +102,27 @@ Assignment: Debugging Assignment
      
      //Might be useful to complete this as well, and use it as part
      //of your solution
-     public static int getInteger()
+     public static int getInteger(Scanner scanner_name)//declaring the getInteger function
+     //with Scanner scanner_name as a parameter and an int return type
      {
-         Scanner sc = new Scanner(System.in);
          
-         int nValue = 0;
-         boolean bValidInput = false;
-         
-         while (!bValidInput)
+         int nValue = 0;//creating a variable to store the user's input and to return
+         boolean bValidInput = false;//setting the while loop control variable to false
+         while (!bValidInput)//declaring while loop based on bValid input boolean variable
          {
-             //Try to get an integer, dealing with any exceptions.
-             //If the integer is successfully received set
-             //bValidInput to true
+            try{//declaring try block for trying to store the user;s input in an int variable
+                //Get the number
+                System.out.print("Please enter a number (type a negative number to end):");
+                nValue = scanner_name.nextInt();//storing the user's input in return int variable nValue
+                bValidInput = true;//seting boolean variable bValidInput to true to exit the loop
+            }
+            catch(Exception e){//catching an exception if the user's inout is not an int
+                System.out.println("Sorry that's an invalid input!");//telling the user there input is invalid
+                scanner_name.nextLine();//emptying the scanner's invalid input by by clearing the input  
+                bValidInput = false;//setting bValidInput to false as an extra precaution to activate if the user's input 
+                //is not an int
+            }
          }
-         sc.close();
-         
-         return nValue;
+         return nValue;//returning the nValue variable
      }
  }
