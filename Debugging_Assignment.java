@@ -3,7 +3,7 @@ Name: Humza Saleem Khan
 Student Number: 777320@pdsb.net
 Course Code: ICS4U4
 Assignment: Debugging Assignment
-02/25/2025
+02/27/2025
 
  * This program is supposed to allow the user to add numbers to
  * an array, stopping when the enter a negative value.
@@ -110,6 +110,8 @@ Assignment: Debugging Assignment
          boolean bValidInput = false;//setting the while loop control variable to false
          while (!bValidInput)//declaring while loop based on bValid input boolean variable
          {
+            //removing the scanner decleration from getInteger function
+
             try{//declaring try block for trying to store the user;s input in an int variable
                 //Get the number
                 System.out.print("Please enter a number (type a negative number to end):");
