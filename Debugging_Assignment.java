@@ -3,7 +3,7 @@ Name: Humza Saleem Khan
 Student Number: 777320@pdsb.net
 Course Code: ICS4U4
 Assignment: Debugging Assignment
-02/27/2025
+02/28/2025
 
  * This program is supposed to allow the user to add numbers to
  * an array, stopping when the enter a negative value.
@@ -58,6 +58,8 @@ Assignment: Debugging Assignment
             //to make sure the program dosn't overfill the array
                 System.out.println("Congratulations you entered 100 values into the array now it's full Goodbye!");
                 //telling the user the array is full
+                break;
+                //breaking out of the while loop
             }
              //Get the number
              newValue = getInteger(sc);//setting the newValue variabe to the run the getInteger function
