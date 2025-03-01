@@ -3,30 +3,7 @@ Name: Humza Saleem Khan
 Student Number: 777320@pdsb.net
 Course Code: ICS4U4
 Assignment: Debugging Assignment
-02/28/2025
-
- * This program is supposed to allow the user to add numbers to
- * an array, stopping when the enter a negative value.
- * At the end, it should display the contents of the array
- * 
- * It's required that new values appear at the beginning of the array,
- * not the end.
- * 
- * The program isn't working correctly at all.
- * 
- * Your task is to:
- * 
- * 1) Fix the program so that it actually correctly maintains
- *    the entered numbers, with new numbers appearing at the
- *    beginning of the list, and no negative numbers in the list
- *    
- * 2) Try to make the program error-proof; deal with cases where
- *    the user enters invalid values, or enters too many values.
- *    You cannot make the array bigger, or replace it with a
- *    different type of structure like a List.  Once the array
- *    is full, the program should just tell the user that they
- *    can't enter any more numbers, display the contents of the array
- *    and end
+03/01/2025
  */
 
  import java.util.Scanner;//importing the Scanner library for taking inputs
