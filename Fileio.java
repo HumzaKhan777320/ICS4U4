@@ -3,7 +3,7 @@ Name: Humza Saleem Khan
 Student Number: 777320@pdsb.net
 Course Code: ICS4U4
 Assignment: Classwork - File I/O
-03/06/2025
+03/08/2025
 
 Variable Dictionary:
 Fileio - name of the file and the main class of the code
@@ -21,7 +21,7 @@ i - int variable for iterating through every second index in the indexArr array
 first_value - int variable for storing the ith index of the indexArr array as an int
 second_value - int variable for storing the i+1th index of the indexArr array as an int
 eqn - string type variable for storing each equation sentence made from the inpt_file 
-//and to be written to the outpt_file
+and to be written to the outpt_file
  */
 import java.io.File;////importing the File library for opening the input file
 import java.io.FileWriter;//importing the FileWriter library for writing to files
@@ -54,7 +54,7 @@ public class Fileio {//declaring the main class of the code with same name as fi
                 //asking the user to input the input file name
                 String inpt_file = userScanner.next();
                 //storing the inputted file name in string variable inpt_file
-
+            
                 System.out.print("Enter your output file name dont forget the .txt: ");
                 //asking the user to input the output file name
                 String outpt_file = userScanner.next();
