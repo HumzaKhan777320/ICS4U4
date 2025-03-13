@@ -1,3 +1,10 @@
+/*
+Name: Humza Saleem Khan 
+Student Number: 777320@pdsb.net
+Course Code: ICS4U4
+Assignment: ASSIGNMENT - Grade Report
+03/12/2025
+ */
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -5,8 +12,6 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Summative {
-
-    
     public static void main(String[] args) {
 
         Scanner userScanner =new Scanner(System.in);
@@ -251,7 +256,7 @@ public class Summative {
         String[] top_scorers= new String[occurances_of_top];
 
         for(int i=0; i<occurances_of_top; i++){
-            top_scorers[i]=name[name.length-1-i];
+            top_scorers[i]=name[name.length-occurances_of_top+i];
         }
 
         return top_scorers;
@@ -260,7 +265,7 @@ public class Summative {
 
     public static String[] still_trying(int bottom, int[] score, String[] name){
         int occurances_of_bottom=0;
-        for(int i=0; i<score.length-1; i++){
+        for(int i=0; i<score.length; i++){
             if(score[i]==bottom){
                 occurances_of_bottom++;
             } else{
@@ -287,11 +292,11 @@ public class Summative {
             //openning the outpt_file file for writing with the FileWriter 
             //variable writeFile
             String bst=top_scorers[0];
-            for(int i=1;i<top_scorers.length-1;i++){
+            for(int i=1;i<top_scorers.length;i++){
                 bst=bst+", "+top_scorers[i];
             }
             String wrst=bottom_scorers[0];
-            for(int i=1;i<bottom_scorers.length-1;i++){
+            for(int i=1;i<bottom_scorers.length;i++){
                 wrst=wrst+", "+bottom_scorers[i];
             }
             writeFile.write("Total Students: "+lines+"\n");
