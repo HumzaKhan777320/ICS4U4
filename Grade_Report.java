@@ -3,7 +3,7 @@ Name: Humza Saleem Khan
 Student Number: 777320@pdsb.net
 Course Code: ICS4U4
 Assignment: ASSIGNMENT - Grade Report
-03/15/2025
+03/16/2025
 
 Variable Dictionary:
 Grade_Report - name of the file and the main class of the code
@@ -98,8 +98,20 @@ import java.util.Scanner;//importing the Scanner library for taking inputs
 import java.text.DecimalFormat;//importing the DecimalFormat library for rounding the average
 //grade to 1 decimal place
 
+
 public class Grade_Report {//declaring the main class of the code with same name as file (Grade_Report)
-    public static void main(String[] args) {//creating the main method/function for the code
+    /**
+     * The main function for running the grade report program
+     * 
+     * <p>
+     * Prompts the user for an input file containing student names and grades, processes the data, 
+     * and generates a summary report, the processed data is sorted, analyzed, and written to an 
+     * output file inputted by the user
+     * 
+     * @param args Not used in this program 
+     * @throws {@link java.io.IOException}
+    */
+         public static void main(String[] args) throws IOException {//creating the main function for the code
     //necessary for coding anything in java (skeleton code)
 
         Scanner userScanner =new Scanner(System.in);//creating userScanner to take the
@@ -111,6 +123,7 @@ public class Grade_Report {//declaring the main class of the code with same name
             
         File textFile = new File(inpt_file);
         //openning the inpt_file file with the File variable textFile
+
         int lines=counting(textFile);
         //calling the counting function with textFile as a parameter and
         //storing the return in int variable lines
@@ -133,6 +146,8 @@ public class Grade_Report {//declaring the main class of the code with same name
             }else{//declaring else statment as the code should only continue if
             //no exceptions occured
 
+                System.out.println("Imported data successfully");
+                //telling the user that data was imported
                 String[] name = new String[lines];
                 //creating a string array for storing the students names
                 //in the allocation function and setting it to a legth of lines
@@ -147,27 +162,35 @@ public class Grade_Report {//declaring the main class of the code with same name
                 //to true necessary for indicating if an exception occurs in 
                 //the allocation function as the code should stop then
 
-                allocation(allocation_control,lines,name,score,inptarr);
-                //calling the void allocation function that takes the
+                allocation_control = allocation(allocation_control,lines,name,score,inptarr);
+                //calling the allocation function that takes the
                 //inptarr,name, and score arrays as parameters along
                 //with the allocation_control variable to check for exceptions
+                //then returns it
+
                 if(allocation_control==true){//checking that the allocation_control variable
                 //is still true indicating an exception didnt occur in the allocation function
+                    System.out.println("Splitting the data into names and grades");
+                    //telling the user that data was split successfully
                     mergeSort(score,name,0,score.length-1);
                     //calling the mergeSort function which takes the score and name
                     //arrays as parameters along with the lower and upper bound of them
                     //as parameters to sort the score array from least to greatest
-
+                    System.out.println("Sorted grades successfully");
+                    //telling the user that the grades were sorted
                     String average=calculateAverage(score);
                     //calling the calculateAverage function with score as a parameter
                     //and storing the return in the string variable average
-                        
+                    System.out.println("Calculated average grade");
+                    //telling the user that the average was calculated
                     int bottom=score[0];
                     //creating int variable bottom and setting it to the lowest grade in the inpt_file file
                     //(as the score function is sorted the 1st index is the lowest grade)
                     int top=score[lines-1];
                     //creating int variable top and setting it to the highest grade in the inpt_file file
                     //(as the score function is sorted the last index is the highest grade)
+                    System.out.println("Found lowest and highest grade");
+                    //telling the user that the lowest and highest grades were found
                     String[] top_scorers= best(top,score,name);
                     //calling the best function with the name and score arrays as
                     //parameters along with the int variable top and storing the return 
@@ -176,7 +199,9 @@ public class Grade_Report {//declaring the main class of the code with same name
                     //calling the still_trying function with the name and score arrays as
                     //parameters along with the int variable bottom and storing the return 
                     //in the string array top_scorers
-
+                    System.out.println("Found the names of the students with the lowest and highest grade");
+                    //telling the user that the the names of the students 
+                    //with the lowest and highest grade were found
                     writeToFile(lines,average,top,bottom,top_scorers,bottom_scorers);
                     //calling the writeToFile function with various arrays, ints, and strings
                     //as parameters to create a summary and writing to an output file
@@ -187,10 +212,29 @@ public class Grade_Report {//declaring the main class of the code with same name
     }//closing the main function
 
 
-    public static int counting(File textFile){//creating counting function that returns an int and takes a file as a parameter returns the number of lines in the file
+    /**
+     * Counts how many lines of data are in the input file
+     * 
+     * <p>
+     * Goes through the input file as long as there are lines to be read
+     * and increments a counter variable until there are no lines unread,
+     * incase of an exception occurs the function returns a negative as
+     * the file was unopenable 
+     * 
+     * @param textFile Name of the file variable used for opening the input file
+     * @throws {@link java.io.IOException}
+     * @return The number of lines of data in the input file 
+     * but in case of an {@link java.io.IOException} returns a negative
+     * to indicate an {@code Exception} occured
+     */
+    public static int counting(File textFile) throws IOException{
+    //creating counting function that counts the number of lines in the input file
+    //and returns it as an int
         try {//declaring try function
             Scanner fileScanner = new Scanner(textFile);
             //declaring a scanner variable fileScanner to take input from the textFile file
+            System.out.println("Opening the input file");
+            //telling the user the code is opening the input file
             int lines=0;
             //creating an int variable lines to count the number of lines in the textFile file
             while (fileScanner.hasNextLine()){//creating a while loop that will run for the number 
@@ -200,6 +244,8 @@ public class Grade_Report {//declaring the main class of the code with same name
                 lines++;
                 //incrementing lines as the loop passed through a line
             }//closing while loop
+            System.out.println("Counting the lines in the input file");
+            //telling the user the code is counting the lines in the input file
             fileScanner.close();//closing the fileScanner scanner
             return lines;//returning the lines variable
         } catch (IOException e) {//declaring catch statment incase the file was not found
@@ -208,8 +254,25 @@ public class Grade_Report {//declaring the main class of the code with same name
         }//closing catch statment
     }//closing counting function
 
-
-    public static String[] file_inpt(File textFile, int lines){//----------------------------------------------------------------------------------------------------------------------save for javadoc
+    /**
+     * Reads and stores each line of data from the input file
+     * 
+     * <p>
+     * Goes through the input file lines times and stores the
+     * lines read in a string type array then returns an array after 
+     * the whole file is read, incase an exception occurs the function
+     * returns an expty array of a differnt size than lines
+     * 
+     * @param textFile Name of the file variable used for opening the input file
+     * @param lines Number of lines in the input file
+     * @throws {@link java.io.IOException} if the input file could not be found or opened
+     * @return Every line of data read from the input file, as a string type array
+     * In case of an {@link java.io.IOException} returns an empty array but
+     * with a different length to indicate an {@code Exception} occured
+     */
+    public static String[] file_inpt(File textFile, int lines) throws IOException{
+    //declaring file_inpt function that reads each line of data from
+    //the input file and returns them in a string array
         try {//declaring try function
             String[] storage = new String[lines];
             //declaring a string array storage with a length of lines
@@ -231,9 +294,30 @@ public class Grade_Report {//declaring the main class of the code with same name
         }//closing catch statment
     }//closing file_inpt function
 
-
-    public static void allocation(boolean allocation_control, int lines, String[] name,int[] score, 
-    String[] inptarr){//--------------------------------------------------------------------------------------------------------------------------------------------------------------save for javadoc
+    /**
+     * Goes through an array of data from the input file and splits it into 2 different arrays
+     * 
+     * <p>
+     * Goes through an array where each index is a line of data from the input file and
+     * splits it into 2 pieces of information the name of the student and there grade it then
+     * converts the grade to type {@lcode int} and puts the 2 pieces of info to
+     * the 2 seperate arrays
+     * 
+     * @param allocation_control Boolean variable that's used to indicate if an {@code Exception}
+     * occurs
+     * @param lines Number of lines in the input file and length of the data arrays
+     * @param name Name of the {@code String} array to store only the students names
+     * @param score Name of the {@code int} array to store only the students grades
+     * @param inptarr Name of the {@code String} array with every line of the input file as strings
+     * @throws {@link java.lang.ArrayIndexOutOfBoundsException}
+     * @throws {@link java.lang.NumberFormatException}
+     * @return A boolean variable to make sure no exceptions occured (mainly works for altering 
+     * parameters the return exists only to check for exceptions)
+     */
+    public static boolean allocation(boolean allocation_control, int lines, String[] name,int[] score, 
+    String[] inptarr) throws ArrayIndexOutOfBoundsException, NumberFormatException{
+    //declaring allocation function that splits information read from the file into 2 seperate arrays 
+    //as they are needed individually
         for(int i=0;i<lines;i++){//declaring for loop that runs lines times
             try{//declaring try statment
                 String[] info=inptarr[i].split(" ");//spliting the ith index of the inptarr array
@@ -243,19 +327,41 @@ public class Grade_Report {//declaring the main class of the code with same name
                 score[i]=Integer.valueOf(info[1]);
                 //converting the second index of the info array to an int
                 //and storing it at the ith index of the score array
-            } catch(Exception e){//declaring catch statment incase the data read is formated incorectly
+            } catch(ArrayIndexOutOfBoundsException | NumberFormatException e){
+            //declaring catch statment incase the data read is formated incorectly
                 allocation_control=false;//setting allocation_control to false to
                 //indicate an exception occured when the allocation function is called
                 System.out.println("The input data seems to have a format issue please check and try again");
                 //telling the user that the input file has a format issue
+                break;
+                //breaking out of the loop as the data is incorect
             }//closing the catch statment
         }//closing for loop
+        return allocation_control;
+        //returning the allocation_control variable to detect exceptions
     }//closing the allocation function
 
-
-    public static void mergeSort(int[] arr1, String[] arr2, int low, int high){//---------------------------------------------------------------------------------------------------------------------------------javadoc this
-    //declaring function mergeSort that sorts 2 arrays together using merge sort
-    //takes 2 arrays and the upper and lower bounds of the processed array as parameters
+    /**
+     * Sorts an array using merge sort and alters another array to match the first
+     * as its sorted
+     * 
+     * <p>
+     * Uses recursion to continue to break up the main array then compare the split
+     * sub arrays to eventually sort the whole main array as the sub arrays are being
+     * merged back together and copied bocak to the main array, also doing the same 
+     * processes without a sorting check to the secondary array so they still corespond
+     * at each index
+     * 
+     * @param arr1 Main array of type {@code int} to be sorted using merge sort
+     * @param arr2 Secondary array of type {@code String} to be altered as arr1 gets altered
+     * to make sure each index still coresponds to its respective arr1 counterpart
+     * @param low Lower bound of the array being sorted as to split it evenly and to 
+     * eventually stop spliting the array
+     * @param high Upper bound of the array being sorted as to split it evenly and to 
+     * eventually stop spliting the array
+     */
+    public static void mergeSort(int[] arr1, String[] arr2, int low, int high){
+    //declaring function mergeSort that sorts 2 arrays together using merge sort through recursion
         if(low<high){
         //compares low and high to create an exit condition for the recursion
             int mid = low + Math.floorDiv((high - low),2);
@@ -269,11 +375,28 @@ public class Grade_Report {//declaring the main class of the code with same name
         }//closing if statment    
     }//closing the mergeSort function
 
-
-    public static void merge(int[] arr1,String[] arr2, int low, int mid, int high){//---------------------------------------------------------------------------------------------------------------------------------javadoc this
-    //declaring merge function that merges two sorted sub-arrays
-    //takes arr1 and arr2 along with the lower and upper bounds of the array and the middle
-    //index as parameters
+    /**
+     * Splits the main and secondary arrays into sub-arrays sorts the sub-arrays
+     * then merges them back into the main and secondary arrays
+     * 
+     * <p> 
+     * Calculates the lengths of the 2 sub-arrays then copies data from the main and
+     * secodary arrays into them then continues to copy the data back into there respective
+     * original arrays as the main array's sub-arrays are compared and sorted also checking
+     * that everything gets copied back succesfully to avoid losing information through 
+     * tracking the index being copied
+     * 
+     * @param arr1 Main array of type {@code int} to be sorted using merge sort
+     * @param arr2 Secondary array of type {@code String} to be altered as arr1 gets altered
+     * @param low Lower bound of the array being sorted as to split it evenly and to 
+     * eventually stop spliting the array
+     * @param mid Index at which to split the main arrays into 2 fairly even sub-arrays
+     * @param high Upper bound of the array being sorted as to split it evenly and to 
+     * eventually stop spliting the array
+     */
+    public static void merge(int[] arr1,String[] arr2, int low, int mid, int high){
+    //declaring merge function that merges two sorted sub-arrays per main array
+    //back together and copies them back to their respective main arrays
     int n1 = mid - low + 1;
     //calculating the number of elements in the left sub-array and storing in n1
     int n2 = high - mid;
@@ -363,11 +486,20 @@ public class Grade_Report {//declaring the main class of the code with same name
     }//closing the while loop
     }//closing the merge function
 
-
-    public static String calculateAverage(int[] score){//---------------------------------------------------------------------------------------------------------------------------------javadoc this
-    //declaring calculateAverage function that calculates the average of all
-    //the students score taking an int array with students grades as a parameter 
-    //and returning the average as type String rounded to one decimal space
+    /**
+     * Calculates the average of the indexes in an {@code int} array
+     * 
+     * <p>
+     * Goes through the {@code int} array and adds the values together
+     * then divides that total value by the number of grades to find the
+     * average then formats it to one decimal place and returns it as type {@code String}
+     * 
+     * @param score Name of the {@code int} array with the students grades
+     * @return The average of the student's grades formated to 1 decimal place, as a {@code String}
+     */
+    public static String calculateAverage(int[] score){
+    //declaring calculateAverage function that adds the grades and divides by the number of 
+    //grades then formats it to 1 decimal place and returns the average as a string array
         int total=0;
         //creating int variable total for storing the
         //total grades of all the students
@@ -392,8 +524,23 @@ public class Grade_Report {//declaring the main class of the code with same name
         //returning the formatAverage variable
     }//closing the calculateAverage function
 
-
-    public static String[] best(int top, int[] score, String[] name){//---------------------------------------------------------------------------------------------------------------------------------javadoc this
+    /**
+     * Finds the names of the students who achieved the highest grade
+     * 
+     * <p>
+     * Finds the number of students who achived the highest grade ({@code top}) and
+     * since the students names are arranged from lowest to highest grade the names 
+     * of the students with the top grade are returned in the order they appear in 
+     * the names array
+     * 
+     * @param top The highest grade to search for in the scores array
+     * @param score Name of the {@code int} array with the students grades
+     * @param name Name of the {@code String} array with the students names
+     * @return A {@code String} array containing the names of the students with the highest grade
+     */
+    public static String[] best(int top, int[] score, String[] name){
+    //declaring best function that finds the names of the students who got
+    //the highest grade and returns them in a string array
         int occurances_of_top=0;//creating int variable occurances_of_top and setting
         //it to 0 to count the number of students who acheved the highest grade
         for(int i=score.length-1; i>0; i--){//declaring for loop that iterates through the
@@ -418,8 +565,23 @@ public class Grade_Report {//declaring the main class of the code with same name
         return top_scorers;//returning the top_scorers string array
     }//closing the best function
 
-
-    public static String[] still_trying(int bottom, int[] score, String[] name){//---------------------------------------------------------------------------------------------------------------------------------javadoc this
+    /**
+     * Finds the names of the students who achieved the lowest grade
+     * 
+     * <p>
+     * Finds the number of students who achived the lowest grade ({@code bottom}) and
+     * since the students names are arranged from lowest to highest grade the names 
+     * of the students with the bottom grade are returned in the order they appear in 
+     * the names array
+     * 
+     * @param top The lowest grade to search for in the scores array
+     * @param score Name of the {@code int} array with the students grades
+     * @param name Name of the {@code String} array with the students names
+     * @return A {@code String} array containing the names of the students with the lowest grade
+     */
+    public static String[] still_trying(int bottom, int[] score, String[] name){
+    //declaring still_trying function that finds the names of the students who got
+    //the lowest grade and returns them in a string array
         int occurances_of_bottom=0;//creating int variable occurances_of_bottom and 
         //setting it to 0 to count the number of students who acheved the lowest grade
         for(int i=0; i<score.length; i++){//declaring for loop that iterates through the score array
@@ -443,8 +605,29 @@ public class Grade_Report {//declaring the main class of the code with same name
         return bottom_scorers;//returning the bottom_scorers string array
     }//closing the still_trying function
 
+
+    /**
+     * Writes a sumarry from the input file to an output file
+     * 
+     * <p>
+     * Creates a summary of the input data, including the total number of students, 
+     * average grade, highest grade and achiving students, and lowest grade and achiving
+     * students the output is written to a file whose name is provided by the user
+     * 
+     * @param lines Number of students listed in the input file
+     * @param average Average grade of the students as type {@code String}
+     * @param top The highest grade achived by at least 1 student 
+     * @param bottom The lowest grade achived by at least 1 student 
+     * @param top_scorers Name of an array of type {@code String} with the 
+     * names of students who achived the highest grade
+     * @param bottom_scorers Name of an array of type {@code String} with the 
+     * names of students who achived the lowest grade
+     * @throws {@link java.io.IOException}
+     */
     public static void writeToFile(int lines, String average, int top, int bottom, String[] top_scorers,
-    String[] bottom_scorers){//---------------------------------------------------------------------------------------------------------------------------------javadoc this
+    String[] bottom_scorers)throws IOException{//declaring writeToFile function that takes the ouptput 
+        //file name from the user and prints a summary of the input file to it
+
         Scanner userScanner2 =new Scanner(System.in);//creating userScanner2 to take the
         //output file name from the user
         System.out.print("Enter your output file name dont forget the .txt: "); 
@@ -455,6 +638,8 @@ public class Grade_Report {//declaring the main class of the code with same name
             FileWriter writeFile = new FileWriter(output_file, false);
             //openning the outpt_file file for writing with the FileWriter 
             //variable writeFile
+            System.out.println("Opening "+output_file+" file");
+            //telling the user the code is opening the output file
             String bst=top_scorers[0];
             //declaring string variable bst to store the 0th index of top_scorers
             //and to concatanate to with the rest of the names in top_scorers
@@ -475,6 +660,9 @@ public class Grade_Report {//declaring the main class of the code with same name
             double d_version= Double.valueOf(average);
             //converting average back to a double and storing in double variable d_version
             //necessary to add a .0 when needed 
+            System.out.println("Writing summary to the "+output_file+" file");
+            //telling the user the code has began to write a sumarry to the
+            //output file
             writeFile.write("Total Students: "+lines+"\n");
             //writing the total number of students to the output_file file
             writeFile.write("Average Grade: "+d_version+"%\n");
@@ -486,6 +674,9 @@ public class Grade_Report {//declaring the main class of the code with same name
             //writing the lowest grade and the students
             //who achived it to the output_file file
             writeFile.close();//closing the writeFile file writer
+            System.out.println("Finished check the "+output_file+" file");
+            //telling the user the program finished executing and to check
+            //the output file
         } catch (IOException e) {//declaring catch statment incase the file was not found
             System.out.println("Sorry we couldn't write to the "+output_file+" file");
             //letting the user know we couldn't write to the output_file file
