@@ -1,6 +1,14 @@
 package prodcode1;
 
 /*
+Name: Humza Saleem Khan 
+Student Number: 777320@pdsb.net
+Course Code: ICS4U4
+Assignment: CLASSWORK - Product Code Problem
+04/12/2025
+*/
+
+/*
  * This class represents the new style of product code,
  * with no lower-case letters and all of the integers
  * added together at the end
