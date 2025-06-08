@@ -1,3 +1,11 @@
+/*
+Name: Humza Saleem Khan 
+Student Number: 777320@pdsb.net
+Course Code: ICS4U4
+Assignment: ASSIGNMENT - Bouncing Balls
+06/08/2025
+*/
+
 import processing.core.*;//importing processing for drawing 
 import java.util.Random;//importing random for generating random ball colors, speeds, sizes, and locations
 import java.util.Scanner;//importing scanner for user input

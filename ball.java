@@ -1,3 +1,11 @@
+/*
+Name: Humza Saleem Khan 
+Student Number: 777320@pdsb.net
+Course Code: ICS4U4
+Assignment: ASSIGNMENT - Bouncing Balls
+06/08/2025
+*/
+
 import processing.core.*;//importing processing for drawing
 
 public class ball {//declaring the main class with same name as file (ball)
